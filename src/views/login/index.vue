@@ -37,8 +37,8 @@ export default {
     return {
       // 表单数据对象
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '17613634385',
+        code: '246810'
       },
       // 表单验证规则对象
       loginRules: {
@@ -68,7 +68,9 @@ export default {
               // res 是 响应对象  包含 后台返回的数据 res.data
               // console.log(res.data) 去做什么事情？？？
               // 1. 跳转到首页
-              // TODO 2. 保存用户的信息  用来判断登录的状态
+              // 2. 保存用户的信息  用来判断登录的状态
+              // 设置本地的存储信息  第一个是名称  第二个是json字符串形式的
+              window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {
