@@ -55,30 +55,72 @@ export default {
   },
   methods: {
     login () {
-      // 对整个表单进行校验
-      this.$refs.loginForm.validate(valid => {
+      // this.$refs.loginForm.validate(async valid => {
+      //   if (valid) {
+      //     // 发请 promise对象 给你发请求
+      //     // try{ 业务逻辑 }catch(err){ 处理错误 }
+      //     try {
+      //       const res = await this.$http.post('authorizations', this.loginForm)
+      //       window.sessionStorage.setItem('hm74-toutiao', JSON.stringify(res.data.data))
+      //       this.$router.push('/')
+      //     } catch (err) {
+      //       this.$message.error('手机号或验证码错误')
+      //     }
+      //   }
+      // })
+      // 对表单进行校验  在valid前加async与后面的await配合是要买好
+      this.$refs.loginForm.validate(async valid => {
+        // 判断valid的值
         if (valid) {
-          // 提交登录请求  axios是基于primise封装的 post() 返回值一个promise对象
-          this.$http
-            .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-              this.loginForm
-            )
-            .then(res => {
-              // res 是 响应对象  包含 后台返回的数据 res.data
-              // console.log(res.data) 去做什么事情？？？
-              // 1. 跳转到首页
-              // 2. 保存用户的信息  用来判断登录的状态
-              // 设置本地的存储信息  第一个是名称  第二个是json字符串形式的
-              window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 提示
-              this.$message.error('手机号或验证码错误')
-            })
+          // 如果有token就进入的试一试中
+          try {
+            // 声明一个变量用来 保存发送请求的数据  参数一是请求的地址  参数二是表单的数据
+            const res = await this.$http.post('authorizations', this.loginForm)
+            // 获取本地储存参数一是文件的名称  参数二是把数组data对象转换为json字符串
+            window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
+            // 编程显示路由跳转到的
+            this.$router.push('/')
+          } catch (err) { // 当没有找到本地的token信息的时候返回错误信息进行提示
+            this.$message.error('手机号码或者是验证码错误')
+          }
         }
       })
+      // 校验对整个表单
+      // this.$refs.loginForm.validate(async valid => {
+      //   if (valid) {
+      //     try {
+      //       const res = await this.$http.post('authorizations', this.loginForm)
+      //       window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
+      //       this.$router.push('/')
+      //     } catch (err) {
+      //       this.$message.error('手机号或者是验证码错误')
+      //     }
+      //   }
+      // })
+      // 对整个表单进行校验
+      // this.$refs.loginForm.validate(valid => {
+      //   if (valid) {
+      //     // 提交登录请求  axios是基于primise封装的 post() 返回值一个promise对象
+      //     this.$http
+      //       .post(
+      //         'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+      //         this.loginForm
+      //       )
+      //       .then(res => {
+      //         // res 是 响应对象  包含 后台返回的数据 res.data
+      //         // console.log(res.data) 去做什么事情？？？
+      //         // 1. 跳转到首页
+      //         // 2. 保存用户的信息  用来判断登录的状态
+      //         // 设置本地的存储信息  第一个是名称  第二个是json字符串形式的
+      //         window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
+      //         this.$router.push('/')
+      //       })
+      //       .catch(() => {
+      //         // 提示
+      //         this.$message.error('手机号或验证码错误')
+      //       })
+      //   }
+      // })
     }
   }
 }

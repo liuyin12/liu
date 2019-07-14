@@ -63,8 +63,8 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -80,12 +80,35 @@
 export default {
   data () {
     return {
-      collapse: false
+      collapse: false,
+      avatar: '',
+      name: ''
     }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('hm74'))
+    this.avatar = user.photo
+    this.name = user.name
   },
   methods: {
     toggleMenu () {
       this.collapse = !this.collapse
+    },
+    // 设置个人设置页面
+    setting () {
+      // 用户点击后跳转值setting页面
+      this.$router.push('/setting')
+    },
+    // 退出登陆页面
+    logout () {
+      // 本地存储数据移除
+      window.sessionStorage.removeItem('hm74')
+      // 跳转至登陆页面
+      this.$router.push('/login')
+    },
+    // 使用户点击的值然后跳转到相应的页面
+    handleCommand (command) {
+      this[command]()
     }
   }
 }
