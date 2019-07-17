@@ -55,36 +55,36 @@ export default {
   },
   methods: {
     login () {
-      // this.$refs.loginForm.validate(async valid => {
-      //   if (valid) {
-      //     // 发请 promise对象 给你发请求
-      //     // try{ 业务逻辑 }catch(err){ 处理错误 }
-      //     try {
-      //       const res = await this.$http.post('authorizations', this.loginForm)
-      //       window.sessionStorage.setItem('hm74-toutiao', JSON.stringify(res.data.data))
-      //       this.$router.push('/')
-      //     } catch (err) {
-      //       this.$message.error('手机号或验证码错误')
-      //     }
-      //   }
-      // })
-      // 对表单进行校验  在valid前加async与后面的await配合是要买好
       this.$refs.loginForm.validate(async valid => {
-        // 判断valid的值
         if (valid) {
-          // 如果有token就进入的试一试中
+          // 发请 promise对象 给你发请求
+          // try{ 业务逻辑 }catch(err){ 处理错误 }
           try {
-            // 声明一个变量用来 保存发送请求的数据  参数一是请求的地址  参数二是表单的数据
             const res = await this.$http.post('authorizations', this.loginForm)
-            // 获取本地储存参数一是文件的名称  参数二是把数组data对象转换为json字符串
             window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
-            // 编程显示路由跳转到的
             this.$router.push('/')
-          } catch (err) { // 当没有找到本地的token信息的时候返回错误信息进行提示
-            this.$message.error('手机号码或者是验证码错误')
+          } catch (err) {
+            this.$message.error('手机号或验证码错误')
           }
         }
       })
+      // 对表单进行校验  在valid前加async与后面的await配合是要买好
+      // this.$refs.loginForm.validate(async valid => {
+      //   // 判断valid的值
+      //   if (valid) {
+      //     // 如果有token就进入的试一试中
+      //     try {
+      //       // 声明一个变量用来 保存发送请求的数据  参数一是请求的地址  参数二是表单的数据
+      //       const res = await this.$http.post('authorizations', this.loginForm)
+      //       // 获取本地储存参数一是文件的名称  参数二是把数组data对象转换为json字符串
+      //       window.sessionStorage.setItem('hm74', JSON.stringify(res.data.data))
+      //       // 编程显示路由跳转到的
+      //       this.$router.push('/')
+      //     } catch (err) { // 当没有找到本地的token信息的时候返回错误信息进行提示
+      //       this.$message.error('手机号码或者是验证码错误')
+      //     }
+      //   }
+      // })
       // 校验对整个表单
       // this.$refs.loginForm.validate(async valid => {
       //   if (valid) {

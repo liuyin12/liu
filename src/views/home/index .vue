@@ -5,9 +5,9 @@
       <!-- 侧边栏 -->
       <!-- <el-col :span="12"> -->
       <el-menu
-      router
+        router
         style="border-right:none"
-        default-active="1"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -50,16 +50,16 @@
         <!-- 头部设置 -->
         <span class="el-icon-s-fold" @click="toggleMenu"></span>
         <span class="text">江苏传智播客科技教育有限公司</span>
-        <el-dropdown style="float:right">
+        <el-dropdown style="float:right"  @command="handleCommand">
           <span class="el-dropdown-link">
             <img
               style="vertical-align:middle"
               width="30"
               height="30"
-              src="../../assets/images/avatar.jpg"
+              :src="avatar"
               alt
             />
-            <b style="vertical-align:middle;padding-left:5px">Vue</b>
+            <b style="vertical-align:middle;padding-left:5px">{{name}}</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
