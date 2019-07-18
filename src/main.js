@@ -8,6 +8,8 @@ import router from '@/router'
 import componnets from '@/components'
 // 导入axios
 import axios from '@/api/axios'
+// 导入全局样式
+import '@/styles/index.less'
 // 导入jsonbig
 // import JSONBig from 'json-bigint'
 // 注册组件
