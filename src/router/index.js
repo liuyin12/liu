@@ -8,6 +8,7 @@ import Article from '../views/article/index.vue'
 import NotFound from '../views/404/index.vue'
 import Image from '../views/image/index.vue'
 import Publish from '../views/publish/index.vue'
+import Comments from '../views/comments/index.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -19,7 +20,8 @@ const router = new VueRouter({
         { name: 'welcome', path: '/', component: Welcome },
         { name: 'article', path: '/article', component: Article },
         { name: 'publish', path: '/publish', component: Publish },
-        { nane: 'image', path: '/image', component: Image }
+        { nane: 'image', path: '/image', component: Image },
+        { nane: 'comments', path: '/comment', component: Comments }
       ]
     },
     // 匹配不到页面的时候显示404 错误
